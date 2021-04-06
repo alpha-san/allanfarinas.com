@@ -24,6 +24,18 @@ body {
     margin-top: 7%;
 }
 
+a {
+  color: lightgray;
+}
+
+::selection {
+  background: lightblue; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: lightblue;
+}
+
 .cursor {
   height: 16px;
   background-color: white;
