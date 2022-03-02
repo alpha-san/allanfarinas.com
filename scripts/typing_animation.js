@@ -5,15 +5,25 @@ $(function() {
       $(el).html("");
       $("<span class='cursor' />").appendTo(el);
 
-      textArray.forEach(function(c, index) {
-        setTimeout(function() {
-          const currentText = $(el).text();
-          $(el).text(currentText + c);
-          $("<span class='cursor' />").appendTo(el);
-        }, beginDelay + (nextCharDelay * (index + 1)));
+      let setTimeoutIds = [];
+      textArray.forEach((c, index) => {
+        setTimeoutIds.push(setTimeout(() => {
+            const currentText = $(el).text();
+            $(el).text(currentText + c);
+            $("<span class='cursor' />").appendTo(el);
+          }, beginDelay + (nextCharDelay * (index + 1)))
+        );
       });
 
       const totalAnimationTime = (textArray.length * nextCharDelay) + endDelay;
+      const cancelTypingAnimation = () => {
+        setTimeoutIds.forEach(id => clearTimeout(id));
+        $(el).text(textArray.join(""));
+        $(".cursor").hide();
+        resolve(true);
+      };
+
+      $('body').click(() => cancelTypingAnimation());
       setTimeout(() => {
         $(".cursor").hide();
         resolve(true);

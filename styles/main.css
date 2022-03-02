@@ -25,7 +25,11 @@ body {
 }
 
 a {
-  color: lightgray;
+  color: rgb(20, 75, 135);
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 ::selection {
